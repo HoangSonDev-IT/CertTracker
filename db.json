@@ -1,0 +1,29 @@
+{
+  "certificates": [
+    {
+      "id": "1",
+      "name": "Chứng chỉ Lập trình Web Frontend",
+      "issuer": "Coursera",
+      "issueDate": "2025-05-10",
+      "expiryDate": "2028-05-10",
+      "category": "Technology",
+      "imageUrl": "https://placehold.co/600x400/EFEFEF/31343C?text=Frontend+Cert",
+      "description": "Chứng chỉ hoàn thành khóa học Frontend cơ bản với HTML, CSS, JS."
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "name": "HTML/CSS/JS",
+      "level": "Tốt",
+      "category": "Technology"
+    },
+    {
+      "id": "2",
+      "name": "Tiếng Anh giao tiếp",
+      "level": "Khá",
+      "category": "Language"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

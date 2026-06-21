@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CertTracker - Portfolio Chứng Chỉ</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">🏆 CertTracker</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">My Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">Admin Panel</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+      <h2 class="mb-4 text-center">Portfolio Kỹ Năng & Chứng Chỉ</h2>
+
+      <!-- Filter Section -->
+      <div class="row mb-3 mt-5">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <h3>Danh sách Chứng Chỉ</h3>
+          <div style="width: 250px">
+            <select id="filterCategory" class="form-select">
+              <option value="all">Tất cả lĩnh vực</option>
+              <option value="Technology">Công nghệ</option>
+              <option value="Language">Ngoại ngữ</option>
+              <option value="SoftSkill">Kỹ năng mềm</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificates List -->
+      <div class="row" id="certList">
+        <!-- Danh sách chứng chỉ sẽ được render ở đây qua main.js -->
+      </div>
+
+      <hr class="my-5" />
+
+      <!-- Skills Section -->
+      <h3 class="mb-3">Kỹ năng của tôi</h3>
+      <div class="row mb-5" id="skillList">
+        <!-- Danh sách kỹ năng sẽ được render ở đây -->
+      </div>
+    </div>
+
+    <!-- Thêm jQuery (Bắt buộc theo yêu cầu) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Quản Lý Chứng Chỉ</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="admin.html">⚙️ CertTracker Admin</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Về trang Public</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4 mb-5">
+      <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="cert-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#cert-pane"
+            type="button"
+            role="tab"
+          >
+            Quản lý Chứng Chỉ
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="skill-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#skill-pane"
+            type="button"
+            role="tab"
+          >
+            Quản lý Kỹ Năng
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="adminTabContent">
+        <!-- TAB CHỨNG CHỈ -->
+        <div
+          class="tab-pane fade show active"
+          id="cert-pane"
+          role="tabpanel"
+          tabindex="0"
+        >
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Danh sách chứng chỉ</h2>
+            <button
+              class="btn btn-success"
+              id="btnShowAddModal"
+              data-bs-toggle="modal"
+              data-bs-target="#certModal"
+            >
+              + Thêm chứng chỉ
+            </button>
+          </div>
+
+          <!-- Table Cert -->
+          <div class="table-responsive">
+            <table class="table table-striped table-hover rounded shadow-sm">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Hình ảnh</th>
+                  <th>Tên chứng chỉ</th>
+                  <th>Lĩnh vực</th>
+                  <th>Ngày cấp</th>
+                  <th>Ngày hết hạn</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="adminCertList">
+                <!-- Data will be rendered here by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB KỸ NĂNG -->
+        <div class="tab-pane fade" id="skill-pane" role="tabpanel" tabindex="0">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Danh sách kỹ năng</h2>
+            <button
+              class="btn btn-success"
+              id="btnShowAddSkillModal"
+              data-bs-toggle="modal"
+              data-bs-target="#skillModal"
+            >
+              + Thêm kỹ năng
+            </button>
+          </div>
+
+          <!-- Table Skill -->
+          <div class="table-responsive">
+            <table class="table table-striped table-hover rounded shadow-sm">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Tên kỹ năng</th>
+                  <th>Lĩnh vực</th>
+                  <th>Trình độ</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="adminSkillList">
+                <!-- Data will be rendered here by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form Thêm/Sửa CHỨNG CHỈ -->
+    <div
+      class="modal fade"
+      id="certModal"
+      tabindex="-1"
+      aria-labelledby="certModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form id="certForm">
+            <div class="modal-header bg-dark text-white">
+              <h5 class="modal-title" id="certModalLabel">
+                Thêm/Sửa Chứng Chỉ
+              </h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="certId" />
+              <div class="mb-3">
+                <label class="form-label">Tên chứng chỉ (*)</label>
+                <input type="text" class="form-control" id="certName" />
+                <div class="invalid-feedback">
+                  Vui lòng nhập tên chứng chỉ không được để trống.
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Tổ chức cấp (*)</label>
+                  <input type="text" class="form-control" id="certIssuer" />
+                  <div class="invalid-feedback">
+                    Vui lòng nhập tên tổ chức cấp.
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Lĩnh vực (*)</label>
+                  <select class="form-select" id="certCategory">
+                    <option value="Technology">Công nghệ</option>
+                    <option value="Language">Ngoại ngữ</option>
+                    <option value="SoftSkill">Kỹ năng mềm</option>
+                  </select>
+                  <div class="invalid-feedback">Vui lòng chọn lĩnh vực.</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Ngày cấp (*)</label>
+                  <input type="date" class="form-control" id="certIssueDate" />
+                  <div class="invalid-feedback">Vui lòng chọn ngày cấp.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Ngày hết hạn</label>
+                  <input type="date" class="form-control" id="certExpiryDate" />
+                  <small class="text-muted"
+                    >Bỏ trống nếu không có ngày hết hạn</small
+                  >
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">URL Hình ảnh</label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="certImgUrl"
+                  placeholder="https://vd.com/anh.jpg"
+                />
+                <div class="invalid-feedback">
+                  Link hình ảnh phải là URL hợp lệ (bắt đầu bằng http).
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Mô tả thêm</label>
+                <textarea
+                  class="form-control"
+                  id="certDesc"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Hủy
+              </button>
+              <button type="submit" class="btn btn-primary" id="btnSaveCert">
+                Lưu lại
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form Thêm/Sửa KỸ NĂNG -->
+    <div
+      class="modal fade"
+      id="skillModal"
+      tabindex="-1"
+      aria-labelledby="skillModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="skillForm">
+            <div class="modal-header bg-dark text-white">
+              <h5 class="modal-title" id="skillModalLabel">Thêm/Sửa Kỹ Năng</h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="skillId" />
+              <div class="mb-3">
+                <label class="form-label">Tên kỹ năng (*)</label>
+                <input type="text" class="form-control" id="skillName" />
+                <div class="invalid-feedback">
+                  Không được để trống tên kỹ năng.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Lĩnh vực (*)</label>
+                <select class="form-select" id="skillCategory">
+                  <option value="Technology">Công nghệ</option>
+                  <option value="Language">Ngoại ngữ</option>
+                  <option value="SoftSkill">Kỹ năng mềm</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Trình độ (*)</label>
+                <select class="form-select" id="skillLevel" required>
+                  <option value="Cơ bản">Cơ bản</option>
+                  <option value="Trung bình">Trung bình</option>
+                  <option value="Khá">Khá</option>
+                  <option value="Tốt">Tốt</option>
+                  <option value="Xuất sắc">Xuất sắc</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Hủy
+              </button>
+              <button type="submit" class="btn btn-primary">Lưu lại</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
